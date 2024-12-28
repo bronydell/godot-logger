@@ -369,7 +369,13 @@ func put(level, message, module = default_module_name, error_code = -1):
 	var output = format(output_format, level, module, message, error_code)
 
 	if output_strategy & STRATEGY_PRINT:
-		print(output)
+		match level:
+			DEBUG || INFO:
+				print(output)
+			WARN:
+				print_rich("[color=yellow]%s[/color]" % output)
+			ERROR:
+				print_rich("[color=red]%s[/color]" % output)
 
 	if output_strategy & STRATEGY_EXTERNAL_SINK:
 		module_ref.get_external_sink().write(output, level)
