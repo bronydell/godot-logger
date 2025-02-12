@@ -370,7 +370,7 @@ func put(level, message, module = default_module_name, error_code = -1):
 
 	if output_strategy & STRATEGY_PRINT:
 		match level:
-			DEBUG || INFO:
+			DEBUG, INFO:
 				print(output)
 			WARN:
 				print_rich("[color=yellow]%s[/color]" % output)
